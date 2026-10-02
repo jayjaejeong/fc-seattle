@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fast campus · Day1 Company</title>
+  <meta name="description" content="The Future of Education : Contents, AI, and Global">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&display=swap">
+  <script>
+    // 언어 결정: ?lang= > 브라우저 언어
+    (function () {
+      var p = new URLSearchParams(location.search).get('lang');
+      var lang = p === 'en' || p === 'ko' ? p : (navigator.language || '').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en';
+      document.documentElement.dataset.lang = lang;
+      document.documentElement.lang = lang;
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --red: #fc1c49;
+      --red-50: #fff0f7;
+      --n-30: #f5f5f6;
+      --n-500: #747678;
+      --n-800: #37393b;
+      --n-950: #171b1f;
+      --gutter: 20px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #fff;
+      color: var(--n-950);
+      font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      word-break: keep-all;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    html[data-lang="ko"] [lang="en"], html[data-lang="en"] [lang="ko"] { display: none !important; }
+
+    .wrap { max-width: 640px; margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* 언어 토글 */
+    .lang-toggle {
+      position: fixed; top: 16px; right: 16px; z-index: 10;
+      display: flex; padding: 3px; border-radius: 999px;
+      background: rgba(0, 0, 0, .45); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .lang-toggle button {
+      border: 0; background: none; color: #fff; font: inherit; font-size: 13px; font-weight: 600;
+      padding: 6px 12px; border-radius: 999px; cursor: pointer; opacity: .7;
+    }
+    .lang-toggle button[aria-pressed="true"] { background: #fff; color: #000; opacity: 1; }
+
+    /* 표지 */
+    .cover {
+      position: relative; min-height: 100svh; color: #fff;
+      background: #000 url(assets/bg.jpg) 70% center / cover no-repeat;
+      display: flex; flex-direction: column;
+    }
+    .cover .wrap { flex: 1; display: flex; flex-direction: column; width: 100%; padding-top: 24px; padding-bottom: 40px; }
+    .cover .day1 { width: 130px; }
+    .cover-title { margin-top: auto; margin-bottom: auto; padding-top: 48px; }
+    .cover-title h1 { font-family: Outfit, sans-serif; font-weight: 700; font-size: clamp(44px, 12vw, 64px); line-height: 1.1; }
+    .cover-title p { font-family: Outfit, sans-serif; font-weight: 600; font-size: clamp(22px, 6vw, 32px); margin-top: 16px; }
+    .cover .fc { width: 150px; }
+    .scroll-hint { margin-top: 32px; font-size: 13px; opacity: .8; }
+
+    /* 섹션 공통 */
+    section.block { padding: 48px 0 0; }
+    .label { font-size: 18px; font-weight: 700; padding-bottom: 10px; border-bottom: 1px solid #000; margin-bottom: 16px; }
+    .label::after { content: "."; color: var(--red); }
+    .headline { font-size: 24px; font-weight: 700; line-height: 1.3; letter-spacing: -.01em; margin-bottom: 14px; }
+    .body { color: var(--n-800); }
+    .body p + p { margin-top: 12px; }
+
+    .brands { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; }
+    .brands img { height: 18px; width: auto; }
+
+    .info { display: grid; grid-template-columns: 88px 1fr; row-gap: 10px; }
+    .info dt { font-weight: 700; }
+    .info dd { color: var(--n-800); }
+    .info small { font-size: 12px; }
+
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 12px; text-align: center; }
+    .stat b { display: inline-flex; align-items: center; gap: 3px; font-size: 40px; line-height: 1.1; letter-spacing: -.02em; }
+    .stat b img { width: 18px; height: 18px; }
+    .stat span { display: block; font-size: 13px; color: var(--n-800); margin-top: 4px; line-height: 1.35; }
+    .stat small { display: block; font-size: 11px; color: var(--n-500); }
+
+    .fc-box { margin-top: 48px; background: var(--red-50); border-radius: 10px; padding: 28px 24px; }
+    .fc-box .ci { width: 140px; margin: 0 auto; }
+    .fc-box .tag { text-align: center; font-size: 15px; margin-top: 10px; }
+    .fc-box .body { margin-top: 20px; font-size: 14px; color: #000; }
+
+    .cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .cats li {
+      list-style: none; background: var(--n-30); border-radius: 10px; min-height: 60px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-size: 13px; font-weight: 600; line-height: 1.35; padding: 8px;
+    }
+
+    .biz { display: grid; gap: 18px; }
+    .biz h3 { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; }
+    .biz h3 em { font-style: normal; background: var(--red); color: #fff; font-size: 12px; padding: 1px 8px; border-radius: 8px; }
+    .biz p { font-size: 14px; color: #000; opacity: .6; margin-top: 4px; }
+
+    .partners { display: grid; gap: 10px; }
+    .partner { background: var(--n-30); border-radius: 10px; padding: 16px; }
+    .partner h3 { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; line-height: 1.3; }
+    .partner h3 img { width: 24px; height: 24px; flex-shrink: 0; }
+    .partner ul { margin: 8px 0 0 20px; font-size: 13px; color: #414141; }
+
+    .map { position: relative; margin-top: 24px; }
+    .map > img { width: 100%; opacity: .8; }
+    .map i { position: absolute; width: 4.56%; aspect-ratio: 1; background: url(assets/map-dot.svg) center / contain no-repeat; }
+    .map span { position: absolute; transform: translate(-50%, -50%); font-size: clamp(9px, 2.6vw, 12px); font-weight: 600; white-space: nowrap; }
+    .map figcaption { text-align: center; font-size: 12px; color: var(--n-500); margin-top: 8px; }
+
+    /* 마지막 장: 연락처 + 제안서 */
+    .back {
+      margin-top: 64px; color: #fff;
+      background: linear-gradient(transparent 55%, rgba(0, 0, 0, .6)), #000 url(assets/bg.jpg) 20% center / cover no-repeat;
+      padding: 48px 0 56px;
+    }
+    .back .day1 { width: 130px; margin-bottom: 24px; }
+    .contact { display: grid; grid-template-columns: 72px 1fr; row-gap: 12px; font-size: 14px; }
+    .contact dt { font-weight: 700; }
+    .contact dd { color: #e7e7e8; }
+    .contact dd a { text-decoration: none; }
+    .proposal {
+      margin-top: 48px; background: #fff; color: #000; border-radius: 16px; padding: 24px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .proposal .qr { width: 140px; padding: 8px; background: #fff; }
+    .proposal .qr img { width: 100%; image-rendering: pixelated; }
+    .proposal .hint { font-size: 13px; color: var(--n-500); margin-top: 8px; }
+    .cta {
+      margin-top: 20px; width: 100%; display: block; text-decoration: none;
+      background: var(--red); color: #fff; font-weight: 700; font-size: 16px;
+      padding: 16px; border-radius: 12px;
+    }
+    .cta:active { opacity: .85; }
+    .back .fc { width: 150px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button type="button" data-set-lang="ko">KO</button>
+    <button type="button" data-set-lang="en">EN</button>
+  </div>
+
+  <!-- 표지 -->
+  <header class="cover">
+    <div class="wrap">
+      <img class="day1" src="assets/logo-day1-white.svg" alt="Day1 Company">
+      <div class="cover-title">
+        <h1>The Future of Education :</h1>
+        <p>Contents, AI, and Global</p>
+      </div>
+      <img class="fc" src="assets/logo-fc-white.svg" alt="Fast campus">
+      <p class="scroll-hint"><span lang="ko">아래로 스크롤해 소개를 확인하세요 ↓</span><span lang="en">Scroll to read more ↓</span></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="block">
+      <h2 class="label"><span lang="ko">회사 소개</span><span lang="en">About Us</span></h2>
+      <div class="body" lang="ko">
+        <p>Day1 Company는 성인 학습자를 위한 실무·커리어 중심 교육을 제공하는 대한민국 대표 AI 에듀테크 기업입니다. 특히 AI 교육 분야에서 높은 인지도와 신뢰도를 갖춘 브랜드로 자리매김하고 있습니다.</p>
+        <p>성인 교육 콘텐츠 시장에서 국내 최초이자 유일한 Full-Stack 교육 기업으로, 데이터 기반 전략과 확장 가능한 OSMU(One-Source Multi-Use) 실행 체계, 그리고 콘텐츠의 기획부터 제작까지 아우르는 자체 역량을 기반으로 성장하고 있습니다.</p>
+      </div>
+      <div class="body" lang="en">
+        <p>Day1Company is Korea’s leading AI EdTech company delivering practical, career-focused education for adult learners. We stands as the most recognized and trusted brand when it comes to AI-education in Korea.</p>
+        <p>We are the South Korea's first and only Full-Stack Company in the adult education content market. We grow through data-driven strategy, scalable OSMU(One-Source Multi-Use) execution, and end-to-end in-house content production.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="label"><span lang="ko">교육 콘텐츠 사업부</span><span lang="en">CIC</span></h2>
+      <div class="brands">
+        <img src="assets/logo-fc.svg" alt="Fast campus">
+        <img src="assets/logo-coloso.svg" alt="Coloso">
+        <img src="assets/logo-zerobase.svg" alt="zero-base">
+        <img src="assets/logo-mylight.svg" alt="MYLIGHT">
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="label"><span lang="ko">회사 개요</span><span lang="en">Information</span></h2>
+      <dl class="info" lang="ko">
+        <dt>설립일</dt><dd>2017년 4월 17일</dd>
+        <dt>임직원 수</dt><dd>387 <small>(2024년 기준)</small></dd>
+        <dt>사업 분야</dt><dd>온·오프라인 교육 콘텐츠</dd>
+        <dt>매출</dt><dd>$80.9 million (약 1,277억 원) <small>(2024)</small></dd>
+        <dt>CEO</dt><dd>신해동 · 김동혁</dd>
+      </dl>
+      <dl class="info" lang="en">
+        <dt>Founded</dt><dd>April 17, 2017</dd>
+        <dt>Employees</dt><dd>387 <small>(as of 2024)</small></dd>
+        <dt>Business</dt><dd>Online &amp; Offline Education</dd>
+        <dt>Revenue</dt><dd>$80.9 million (KRW 127.7 B) <small>(2024)</small></dd>
+        <dt>CEO</dt><dd>Kangmin Lee<br>Haedong Shin</dd>
+      </dl>
+    </section>
+
+    <section class="block">
+      <h2 class="label"><span lang="ko">성장 지표</span><span lang="en">Growth</span></h2>
+      <div class="stats">
+        <div class="stat"><b>90 M<img src="assets/plus.svg" alt="+"></b><span lang="ko">누적 방문자</span><span lang="en">Cumulative Visitors</span></div>
+        <div class="stat"><b>2.2 M<img src="assets/plus.svg" alt="+"></b><span lang="ko">월간 방문자</span><span lang="en">Monthly Visitors</span></div>
+        <div class="stat"><b>35%<img src="assets/plus.svg" alt="+"></b><span lang="ko"><small>국내 전체 개발자의</small>개발자 회원 비율</span><span lang="en"><small>of Total Developers in Korea</small>Developer Member</span></div>
+        <div class="stat"><b>71%<img src="assets/plus.svg" alt="+"></b><span lang="ko">연평균 성장률</span><span lang="en">Average Yearly Growth</span></div>
+      </div>
+    </section>
+
+    <div class="fc-box">
+      <img class="ci" src="assets/fc-ci.png" alt="Fast campus">
+      <p class="tag">Life-Changing AI Education</p>
+      <div class="body" lang="ko">
+        <p>패스트캠퍼스는 Day1 Company의 대표 교육 콘텐츠 사업부로, 전체 매출의 50% 이상을 차지하고 있습니다. 업계 최고 수준의 전문가와 고품질 교육 콘텐츠를 통해 Life-Changing AI Education을 제공합니다.</p>
+        <p>직장인뿐만 아니라 학생, 연구자, 프리랜서 등 다양한 학습자를 대상으로, 커리어의 모든 단계에서 필요한 교육을 제공합니다.</p>
+      </div>
+      <div class="body" lang="en">
+        <p>FastCampus is a key CIC that accounts for over 50% of Day1Company's total revenue. We deliver life-changing AI education through top industry mentors and high-quality contents.</p>
+        <p>We serves not only Industry Professionals but also students, researchers, and freelancers, supporting diverse learners across all stages of their career journeys.</p>
+      </div>
+    </div>
+
+    <section class="block">
+      <h2 class="label"><span lang="ko">주요 교육 콘텐츠 분야</span><span lang="en">Category</span></h2>
+      <ul class="cats">
+        <li>A.I</li><li>Robotics</li><li>Programming</li>
+        <li>Data<br>Science</li><li>Creative</li><li>Design</li>
+        <li>Business &amp;<br>Marketing</li><li>Finance</li><li>Certificate</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2 class="headline"><span lang="ko">국내 최초 성인 교육 플랫폼<br>코스닥 상장</span><span lang="en">The First AI-Focused Education Company Listed in Korea</span></h2>
+      <div class="body" lang="ko">
+        <p>2025년 1월 코스닥에 상장하며, 국내 최초로 성인 교육을 전문으로 하는 교육 플랫폼으로 시장에 진입했습니다.</p>
+        <p>글로벌 교육기업과 차별화된 서비스를 통해 성장해왔으며, 글로벌 경쟁사 대비 5배 이상의 시장 점유율을 확보하고 있습니다.</p>
+      </div>
+      <div class="body" lang="en">
+        <p>We were listed on the Korean stock market in January 2025, becoming the first education company specializing in AI education. Through differentiated services from global education providers, we have secured a market share more than five times larger than that of our global competitors.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="headline"><span lang="ko">실무 중심 AI 교육,<br>현실의 변화를 만들다.</span><span lang="en">Hands-on AI Training for Real-World Impact</span></h2>
+      <div class="body" lang="ko">
+        <p>패스트캠퍼스는 성인 교육을 넘어 누구나 AI 역량을 키울 수 있는 실질적인 AI 교육 플랫폼으로 성장하고 있습니다.</p>
+        <p>대학생부터 시니어까지 모든 세대가 단계적으로 AI 역량을 쌓을 수 있도록, 실무 중심의 몰입형 교육 환경을 구축해 나가고 있습니다.</p>
+        <p>AI 전문가 네트워크를 확대하고 AI 리터러시 확산을 통해 전 국민의 AI 교육 접근성을 높이는 것을 목표로 합니다.</p>
+        <p>나아가 정부·기업과의 협업을 통해 인재·산업·기술을 연결하는 AI 생태계의 중심 허브로 성장하며, 미래 AI 인재 양성을 주도하고자 합니다.</p>
+      </div>
+      <div class="body" lang="en">
+        <p>Fast Campus aims to evolve beyond adult education into “AI World”, an immersive learning platform where people - from seniors to students - can progressively build their AI capabilities at every stage of life.</p>
+        <p>We aim to expand AI education nationwide by growing our network of AI experts and leading the spread of AI literacy for everyone.</p>
+        <p>We are evolving into a central hub of the AI ecosystem, connecting talent, industry, and innovation through close collaboration with governments and enterprises, while actively leading the development of AI talent.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="label"><span lang="ko">사업 영역</span><span lang="en">Business</span></h2>
+      <div class="biz">
+        <div>
+          <h3><em>B2C</em><span lang="ko">온라인·오프라인 AI 교육 콘텐츠</span><span lang="en">Online &amp; Offline AI Education Contents</span></h3>
+          <p lang="ko">AI 및 실무 역량 분야의 VOD 콘텐츠를 자체 기획·제작하여 제공합니다.</p>
+          <p lang="en">Planning and producing VOD contents in AI and practical skill domains through our in-house system.</p>
+        </div>
+        <div>
+          <h3><em>B2B</em><span lang="ko">구독 서비스 및 기업 맞춤형 교육</span><span lang="en">Subscription Services &amp; On-site Training</span></h3>
+          <p lang="ko">기업의 인재 역량 강화를 위한 유연한 구독 서비스와 맞춤형 방문 교육을 제공합니다.</p>
+          <p lang="en">Flexible subscription services and tailored on-site training to strengthen enterprise workforce capabilities.</p>
+        </div>
+        <div>
+          <h3><em>B2G</em><span lang="ko">정부 협력을 통한 인재 양성</span><span lang="en">Talent Training through Govt. Partnership</span></h3>
+          <p lang="ko">정부기관과 협력하여 대규모 AI·디지털 인재 양성 사업을 운영합니다.</p>
+          <p lang="en">Partnering with government agencies to deliver large-scale AI and Digital talent development programs.</p>
+        </div>
+        <div>
+          <h3><em>Glob.</em><span lang="ko">글로벌 시장 확장 및 현지화</span><span lang="en">Market Expansion &amp; Localized Execution</span></h3>
+          <p lang="ko">현지 시장에 최적화된 실행 역량과 시장 진입 경험을 바탕으로 글로벌 교육 플랫폼을 확장합니다.</p>
+          <p lang="en">Building scalable global education platforms through localized execution and proven market entry expertise.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="label"><span lang="ko">파트너십</span><span lang="en">Partnership</span></h2>
+      <div class="partners">
+        <div class="partner">
+          <h3><img src="assets/icon-student.svg" alt=""><span lang="ko">글로벌 AI 교육 파트너</span><span lang="en">Global AI Education Partner</span></h3>
+          <ul lang="ko"><li>최신 기술과 산업 트렌드를 반영한 분야별 AI 교육 프로그램 기획</li><li>공동 브랜드 AI 커리큘럼 및 자격 인증 프로그램 개발·운영</li><li>B2C·B2B 시장을 아우르는 현지화된 시장 진출 및 사업 실행</li></ul>
+          <ul lang="en"><li>Designing category-specific AI training programs that reflect the latest technologies and industry trends</li><li>Co-branded AI curriculum &amp; certification deployment</li><li>Localized go-to-market execution across B2C, B2B</li></ul>
+        </div>
+        <div class="partner">
+          <h3><img src="assets/icon-handshake.svg" alt=""><span lang="ko">정부 지원 AI 교육 프로그램</span><span lang="en">Government-Funded AI Education Programs</span></h3>
+          <ul lang="ko"><li>국가 규모의 AI·IT 인재 양성 사업 협력</li><li>일자리 연계 및 산업 수요를 반영한 AI·IT 인재 교육 프로그램 운영</li></ul>
+          <ul lang="en"><li>Collaborating in national-scale AI &amp; IT workforce development programs</li><li>Partnering on job-linked, industry-aligned AI &amp; IT talent training programs</li></ul>
+        </div>
+        <div class="partner">
+          <h3><img src="assets/icon-users.svg" alt=""><span lang="ko">글로벌 AI 엔지니어 인재 커뮤니티</span><span lang="en">Global AI Engineer Talent Community</span></h3>
+          <ul lang="ko"><li>글로벌 개발자 및 업계 전문가 네트워크와의 연결</li><li>학습자·개발자·산업 파트너를 연결하여 AI 인재 생태계 확장 촉진</li></ul>
+          <ul lang="en"><li>Connecting with a global network of developers and industry professionals</li><li>Driving the expansion of the AI talent ecosystem by connecting learners, developers, and industry partners</li></ul>
+        </div>
+        <div class="partner">
+          <h3><img src="assets/icon-flag.svg" alt=""><span lang="ko">글로벌 대표 AI 행사 지원</span><span lang="en">Supporting Flagship AI Global Events</span></h3>
+          <ul lang="ko"><li>개발자와 기업을 대규모로 연결하여 AI 도입과 생태계 확산을 지원</li><li>브랜드 인지도를 높이고 혁신을 촉진하는 공동 브랜드 AI 컨퍼런스 및 해커톤 운영</li></ul>
+          <ul lang="en"><li>Large-scale mobilization of developers and enterprises to accelerate AI adoption and ecosystem growth</li><li>High-impact co-branded AI Conferences &amp; Hackathons that enhance brand visibility and foster innovation</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="headline"><span lang="ko">아시아·태평양 진출을 위한<br>전략적 교육 허브</span><span lang="en">The Strategic Education Hub for Asia-Pacific Expansion</span></h2>
+      <div class="body" lang="ko">
+        <p>한국을 기반으로 아시아·태평양 시장 진출의 거점이 될 수 있는 확장 가능한 교육 허브를 구축하고 있습니다.</p>
+        <p>현지화된 실행 역량과 검증된 시장 진입 노하우를 바탕으로, 주요 아시아·태평양 시장에 성공적인 AI 교육 모델을 확장하고 있습니다.</p>
+      </div>
+      <div class="body" lang="en">
+        <p>We are building a scalable education hub in Korea that serves as a launchpad for Asia-Pacific expansion. Through localized execution and proven market-entry expertise, we replicate and scale successful AI education models across key regional markets.</p>
+      </div>
+      <figure class="map">
+        <img src="assets/world-map.png" alt="">
+        <i style="left:12.2%;top:38.5%"></i>
+        <i style="left:79.1%;top:37.8%"></i>
+        <i style="left:83.7%;top:33.1%"></i>
+        <i style="left:70.7%;top:55.4%"></i>
+        <i style="left:75.7%;top:58.8%"></i>
+        <span style="left:14.4%;top:51.4%">United States</span>
+        <span style="left:69.6%;top:41.9%">South Korea</span>
+        <span style="left:93.2%;top:36.5%">Japan</span>
+        <span style="left:62.7%;top:59.5%">Singapore</span>
+        <span style="left:87.8%;top:62.8%">Indonesia</span>
+        <figcaption><span lang="ko">DAY1COMPANY 글로벌 사업 현황</span><span lang="en">Fast Campus’s International Presence</span></figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <!-- 마지막 장: 연락처 + 제안서 -->
+  <footer class="back" id="proposal">
+    <div class="wrap">
+      <img class="day1" src="assets/logo-day1-white.svg" alt="Day1 Company">
+      <dl class="contact" lang="ko">
+        <dt>플랫폼</dt><dd><a href="https://fastcampus.co.kr" target="_blank" rel="noopener">fastcampus.co.kr</a></dd>
+        <dt>주소</dt><dd>서울특별시 강남구 테헤란로 231, 센터필드 WEST 6층, 7층</dd>
+        <dt>담당자</dt><dd>김승민 그룹장<br><a href="mailto:smkim@day1company.co.kr">smkim@day1company.co.kr</a><br><br>김영휘 매니저<br><a href="mailto:younghui.kim@day1company.co.kr">younghui.kim@day1company.co.kr</a></dd>
+      </dl>
+      <dl class="contact" lang="en">
+        <dt>Web</dt><dd><a href="https://fastcampus.co.kr" target="_blank" rel="noopener">fastcampus.co.kr</a></dd>
+        <dt>Address</dt><dd>231, Teheran-ro, Gangnam-gu, Seoul, Republic of Korea</dd>
+        <dt>E-mail</dt><dd><a href="mailto:smkim@day1company.co.kr">smkim@day1company.co.kr</a><br><a href="mailto:younghui.kim@day1company.co.kr">younghui.kim@day1company.co.kr</a></dd>
+      </dl>
+
+      <div class="proposal">
+        <a class="qr" href="proposal.html" data-keep-lang><img src="assets/qr-proposal.svg" alt="QR"></a>
+        <p class="hint"><span lang="ko">QR을 찍거나 아래 버튼을 눌러 제안서를 확인하세요</span><span lang="en">Scan the QR or tap below to read the proposal</span></p>
+        <a class="cta" href="proposal.html" data-keep-lang><span lang="ko">제안서 보러가기 →</span><span lang="en">Read the introduction in detail →</span></a>
+      </div>
+
+      <img class="fc" src="assets/logo-fc-white.svg" alt="Fast campus">
+    </div>
+  </footer>
+
+  <script>
+    var root = document.documentElement;
+    function apply(lang) {
+      root.dataset.lang = lang;
+      root.lang = lang;
+      document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.dataset.setLang === lang);
+      });
+      document.querySelectorAll('a[data-keep-lang]').forEach(function (a) {
+        a.href = 'proposal.html?lang=' + lang;
+      });
+    }
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        apply(b.dataset.setLang);
+        history.replaceState(null, '', '?lang=' + b.dataset.setLang + location.hash);
+      });
+    });
+    apply(root.dataset.lang);
+  </script>
+</body>
+</html>
